@@ -1,2 +1,2 @@
-# CS0134
-Pitt CS0134: Intro to website construction/design
+# CS0134: Intro to website development/design
+Fall 2019
