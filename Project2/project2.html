@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gasoline converter from gallons to barrels of oil, gallons of ethanol, dollars, and pounds of CO2</title>
+</head>
+<body>
+
+<!-- Title and basic info -->
+<h1>Gasoline Energy Converter</h1>
+<p>Gasoline is used to fuel an unfathomable number of commercial and industrial vehicles.  To truly put it in perspective, you can relate it to the oil that produces it as well as ethanol, a biofuel sometimes used to power cars.</p>
+
+<!-- Display button for more info -->
+<button type="button" onclick="document.getElementById('eqinfo').style.display='block'">More info
+</button>
+
+<!-- More info with button to hide it again -->
+<p hidden id="eqinfo">One barrel of oil produces 19.5 gallons of gas. 1 gallon of gas produces 115,000 BTU while 1 gallon of ethanol produces 75,700 BTU, thus you can relate gas to ethanol by dividing 115,000 by 75,700 to get how many gallons of ethanol equal a gallon of gasoline.  1 gallon of gasoline is equivalent to 4 USD and 20 pounds of CO2 as well.  All conversion rates for gallons and liters were taken from CourseWeb. Conversions from Olympic Swimming pool to gallons courtesy of <a href="https://en.wikipedia.org/wiki/List_of_unusual_units_of_measurement#Olympic-size_swimming_pool">wikipedia</a><br /> <button type="button" onclick="document.getElementById('eqinfo').style.display='none'">Hide</button></p>
+
+
+<!-- Description of calculator usage -->
+<p>This calculator takes an input in gallons(default), liters, and olympic swimming pools and tells you the equivalent number of oil barrels, pounds of co2, pounds of ethanol, and price.</p>
+
+<!-- Coach Mark for input -->
+<p id="coach1"><b>INPUT A POSITIVE INTEGER</b></p>
+    
+<!-- Input Box -->
+<input onmouseover="hint()" onkeydown = "removeCoach()" id="input">
+
+<!-- Button to sumbit -->
+<button type="button" onmouseover="removeHint()" onclick="myFunction()">Submit</button>
+    
+<!-- Coach telling user to submit -->
+<p id="coach2" style = "display: none;"><b>&lt; PRESS SUMBIT</b></p>
+    
+<!-- Text telling user input format -->
+<p id="hintText"></p>
+    
+<!--Buttons for settings and input help -->
+<button type="button" onclick="overflow()">Settings</button>
+<button type="button" onclick="inputHelp()">Input Help</button>
+    
+<!-- List of input settings -->
+<p id="settings" style="display:none">
+<input type=radio id="r1" name="r">Liters<br>
+<input type=radio id="r2" name="r">Gallons<br>
+<input type=radio id="r3" name="r">Olympic Swimming pools<br>
+</p>
+    
+<!-- Output area -->
+<p id="output"></p>
+
+<!-- Progress bar -->
+<p id="prog"><img src=0.png></p>
+
+<script>
+function myFunction() 
+{
+    //Change progress bar to complete 
+    document.getElementById("prog").innerHTML = "<img src=100.png>";
+    //Create variables and get values of radio buttons
+    var i, c, text, barrels, co2, ethanol, price;
+    i = document.getElementById("input").value;
+    l = document.getElementById("r1").checked;
+    g = document.getElementById("r2").checked;
+    sp = document.getElementById("r3").checked;
+    //If liters, convert input to gallons and do calculations
+    if(l)
+    {
+        barrels = (i * 3.7854) / 19.5;
+        co2 = (i * 3.7854) * 20;
+        ethanol = ((i * 3.7854) * 115000) / 75700;
+        price = (i * 3.7854) * 4;
+        text = i + " liters of gas is " + barrels + " barrels of oil, " + co2 + " pounds of CO2, " + ethanol + " gallons of ethanol, and " + price + " dollars.";
+    }
+    //If swimming pools, convert to gallons and do calculations
+    else if(sp)
+    {
+       barrels = (i * 660000) / 19.5;
+        co2 = (i * 660000) * 20;
+        ethanol = ((i * 660000) * 115000) / 75700;
+        price = (i * 660000) * 4;
+        text = i + " olympic swimming pools of gas is " + barrels + " barrels of oil, " + co2 + " pounds of CO2, " + ethanol + " gallons of ethanol, and " + price + " dollars.";
+    }
+    //If gallons selected or no selection, do calcualtions with gallons
+    else
+    {
+       barrels = i / 19.5;
+        co2 = i * 20;
+        ethanol = (i * 115000) / 75700;
+        price = i * 4;
+        text = i + " gallons of gas is " + barrels + " barrels of oil, " + co2 + " pounds of CO2, " + ethanol + " gallons of ethanol, and  " + price + " dollars."; 
+    }
+    //Set text to out element
+    document.getElementById("output").innerHTML = text;
+}
+//Set text of hint element
+function hint()
+{
+    document.getElementById("hintText").innerHTML = "Please enter a positive integer.  To input liters or swimming pools, use the settings";
+}
+//Remove hint text
+function removeHint()
+{
+    document.getElementById("hintText").innerHTML = "";
+}
+//Display overflow settings
+function overflow()
+{
+    document.getElementById("settings").style.display='block';
+}
+//Display popover
+function inputHelp()
+{
+    alert("Please enter a positive integer.  To input liters or swimming pools, use the settings");
+}
+//Switch coach tags
+function removeCoach()
+{
+    document.getElementById("coach2").style.display = "inline-block";
+    document.getElementById("coach1").innerHTML = "";
+    document.getElementById("prog").innerHTML = "<img src=50.png>";
+}
+</script>
+
+</body>
+</html> 
